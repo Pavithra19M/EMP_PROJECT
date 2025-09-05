@@ -1,0 +1,15 @@
+{
+  "name": "emp_pro",
+  "version": "2.0.0",
+  "type": "module",
+  "description": "Employee dashboard with MERN STACK   ",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server.js"
+  },
+  "author": "Pavithra",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
