@@ -5,11 +5,23 @@
   "description": "Employee dashboard with MERN STACK   ",
   "main": "server.js",
   "scripts": {
-    "start": "node backend/server.js"
+    "start": "node backend/server.js",
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest"
   },
   "author": "Pavithra",
   "license": "MIT",
   "dependencies": {
     "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.24.0",
+    "@babel/preset-env": "^7.24.0",
+    "@babel/preset-react": "^7.27.1",
+    "@testing-library/jest-dom": "^6.8.0",
+    "babel-jest": "^29.7.0",
+    "cross-env": "^10.0.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "jest-junit": "^16.0.0"
   }
 }
