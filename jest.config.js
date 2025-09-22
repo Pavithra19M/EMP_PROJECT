@@ -26,7 +26,7 @@ export default {
     '!frontend/src/**/index.{js,jsx}',
     '!frontend/src/reportWebVitals.js',
     '!frontend/src/setupTests.js',
-    '!frontend/src/App.js',
+    '!frontend/src/App.{js,jsx}',
     '!frontend/src/Components/LoginPage.jsx',
     '!frontend/src/Components/Laoder.jsx',
     '!backend/**/*.test.{js,jsx}',

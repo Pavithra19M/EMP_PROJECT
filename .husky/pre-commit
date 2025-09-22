@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+# . "$(dirname -- "$0")/_/husky.sh"
+
+# npm run test:threshold
+
+#!/bin/sh
+
+npx lint-staged
+# npx jest --coverage --coverageThreshold='{"global":{"statements":70,"branches":70,"functions":70,"lines":70}}'
