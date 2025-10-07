@@ -13,9 +13,9 @@ jobs:
     name: Build & Test
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false 
       matrix:
         app: [frontend, backend]
-        fail-fast: false 
     defaults:
       run:
         working-directory: ${{ matrix.app }}
