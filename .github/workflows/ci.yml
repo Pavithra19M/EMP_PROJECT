@@ -1,0 +1,130 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build & Test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        app: [frontend, backend]
+        fail-fast: false 
+    defaults:
+      run:
+        working-directory: ${{ matrix.app }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run ESLint
+        run: npm run lint
+
+      - name: Run Tests with Coverage
+        run: npm test -- --coverage
+
+      - name: Build App
+        run: npm run build
+
+      - name: Upload coverage
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.app }}-coverage
+          path: coverage/lcov.info
+
+  sonarcloud:
+    name: SonarCloud Analysis
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Sonar Scanner
+        run: npm install -g sonar-scanner
+
+      - name: Download frontend coverage
+        uses: actions/download-artifact@v3
+        with:
+          name: frontend-coverage
+          path: frontend/coverage
+
+      - name: Download backend coverage
+        uses: actions/download-artifact@v3
+        with:
+          name: backend-coverage
+          path: backend/coverage
+
+      - name: Debug coverage files
+        continue-on-error: false
+        run: |
+          echo "Frontend coverage:"
+          head -n 20 frontend/coverage/lcov.info || echo "Missing frontend coverage"
+          echo "Backend coverage:"
+          head -n 20 backend/coverage/lcov.info || echo "Missing backend coverage"
+
+      - name: Run SonarCloud Scan (Frontend)
+        working-directory: frontend
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          sonar-scanner
+            -Dsonar.projectKey=pavithra-employee-dashboard-frontend
+            -Dsonar.projectName=Pavithra_Employee_Dashboard_Frontend
+            -Dsonar.organization=pavithra19m-1
+            -Dsonar.sources=src
+            -Dsonar.tests=src/__tests__
+            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+            -Dsonar.exclusions=**/node_modules/**,**/*.test.js,**/setupTests.js,**/reportWebVitals.js,**/config/**,**/index.js
+            -Dsonar.coverage.exclusions=**/App.js,**/reportWebVitals.js
+            -Dsonar.pullrequest.branch=${{ github.head_ref }}
+            -Dsonar.pullrequest.key=${{ github.event.pull_request.number }}
+            -Dsonar.pullrequest.base=main
+            -Dsonar.host.url=https://sonarcloud.io
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+
+      - name: Run SonarCloud Scan (Backend)
+        working-directory: backend
+        continue-on-error: false
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          sonar-scanner
+            -Dsonar.projectKey=pavithra-employee-dashboard-backend
+            -Dsonar.projectName=Pavithra_Employee_Dashboard_Backend
+            -Dsonar.organization=pavithra19m-1
+            -Dsonar.sources=src
+            -Dsonar.tests=src/__tests__
+            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+            -Dsonar.pullrequest.branch=${{ github.head_ref }}
+            -Dsonar.pullrequest.key=${{ github.event.pull_request.number }}
+            -Dsonar.pullrequest.base=main
+            -Dsonar.host.url=https://sonarcloud.io
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }}

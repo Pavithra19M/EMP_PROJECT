@@ -5,10 +5,10 @@
   "description": "Employee dashboard with MERN STACK   ",
   "main": "server.js",
   "scripts": {
-    "start": "node backend/server.js",
+    "start": "cross-env NODE_ENV=production node backend/server.js",
     "prepare": "husky install",
-    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
-    "lint": "eslint frontend/src --ext .js,.jsx",
+    "test": "cross-env NODE_ENV=test node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage",
+    "lint": "eslint frontend/src backend/ --ext .js,.jsx",
     "format": "prettier --write frontend/src"
   },
   "eslintConfig": {
@@ -19,6 +19,10 @@
   },
   "lint-staged": {
     "frontend/src/**/*.{js,jsx}": [
+      "eslint --fix --max-warnings=0",
+      "prettier --write"
+    ],
+    "backend/**/*.js": [
       "eslint --fix --max-warnings=0",
       "prettier --write"
     ]
