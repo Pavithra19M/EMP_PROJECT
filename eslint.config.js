@@ -4,7 +4,11 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import prettier from 'eslint-plugin-prettier';
 
 export default [
+ 
+  // Base JS rules
   js.configs.recommended,
+
+  // Frontend: React + JSX + Jest
   {
     files: ['**/*.{js,jsx}'],
     plugins: {
@@ -23,7 +27,14 @@ export default [
       globals: {
         test: true,
         expect: true,
+        describe: true,
+        it: true,
+        beforeEach: true,
+        afterEach: true,
         document: true,
+        window: true,
+        console: true,
+        process: true,
       },
     },
     settings: {
@@ -40,6 +51,8 @@ export default [
       quotes: ['error', 'single'],
     },
   },
+
+  // Backend: Node + Jest
   {
     files: ['backend/**/*.js'],
     languageOptions: {
@@ -51,7 +64,13 @@ export default [
         __dirname: true,
         module: true,
         require: true,
-      },
+        test: true,
+        expect: true,
+        describe: true,
+        it: true,
+        beforeEach: true,
+        afterEach: true,
+      }, 
     },
     rules: {
       'no-unused-vars': 'error',

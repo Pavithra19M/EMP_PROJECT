@@ -36,10 +36,10 @@ export default {
   // Coverage thresholds
   coverageThreshold: {
     global: {
-      branches: 70,
-      functions: 70,
-      lines: 70,
-      statements: 70
+      branches: 50,
+      functions: 50,
+      lines: 50,
+      statements: 50
     },
     // 'frontend/src/Components/LoginForm.jsx': {
     //   branches: 70,

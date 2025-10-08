@@ -53,6 +53,7 @@
     "jest-junit": "16.0.0",
     "lint-staged": "16.1.6",
     "prettier": "3.6.2",
+    "supertest": "^7.1.4",
     "typescript": "5.9.3"
   }
 }

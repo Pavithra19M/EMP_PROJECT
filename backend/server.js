@@ -6,4 +6,8 @@ app.get('/', (req, res) => {
   res.send('Api is running');
 });
 
-app.listen(port, () => console.log(`API is running at port ${port}`));
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(port, () => console.log(`API is running at port ${port}`));
+}
+
+export default app;
