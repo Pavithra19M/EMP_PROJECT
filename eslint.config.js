@@ -40,4 +40,22 @@ export default [
       quotes: ['error', 'single'],
     },
   },
+  {
+    files: ['backend/**/*.js'],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      globals: {
+        console: true,
+        process: true,
+        __dirname: true,
+        module: true,
+        require: true,
+      },
+    },
+    rules: {
+      'no-unused-vars': 'error',
+      'no-undef': 'error',
+    },
+  },
 ];
