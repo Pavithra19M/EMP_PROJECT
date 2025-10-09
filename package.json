@@ -7,7 +7,8 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node backend/server.js",
     "prepare": "husky install",
-    "test": "cross-env NODE_ENV=test jest --coverage",
+    "test": "npm run test:backend",
+    "test:backend": "cross-env NODE_ENV=test jest --coverage",
     "lint": "eslint frontend/src backend/ --ext .js,.jsx",
     "format": "prettier --write frontend/src"
   },
@@ -42,7 +43,7 @@
     "ajv": "^8.17.1",
     "babel-jest": "29.7.0",
     "cross-env": "10.0.0",
-    "eslint": "9.35.0",
+    "eslint": "^9.37.0",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-prettier": "5.5.4",
     "eslint-plugin-react": "7.37.5",
