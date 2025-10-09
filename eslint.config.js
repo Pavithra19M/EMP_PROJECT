@@ -35,6 +35,7 @@ export default [
         window: true,
         console: true,
         process: true,
+        global: true
       },
     },
     settings: {
