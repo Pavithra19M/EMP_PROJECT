@@ -19,6 +19,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --coverage",
     "eject": "react-scripts eject",
+    "lint:frontend": "eslint src --ext .js,.jsx",
     "lint": "eslint src --fix"
   },
   "eslintConfig": {

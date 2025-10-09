@@ -16,9 +16,6 @@ jobs:
       fail-fast: false 
       matrix:
         app: [frontend, backend]
-    defaults:
-      run:
-        working-directory: ${{ matrix.app }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -38,9 +35,17 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+        working-directory: .
 
-      - name: Run ESLint
-        run: npm run lint
+      # Linting
+      - name: Run Frontend Lint
+        if: matrix.app == 'frontend'
+        run: npm run lint:frontend
+        working-directory: .
+
+      - name: Run Backend Lint
+        if: matrix.app == 'backend'
+        run: npm run lint:backend
         working-directory: .
 
       - name: Run Backend Tests
@@ -48,13 +53,18 @@ jobs:
         run: npm run test:backend
         working-directory: .
 
-      - name: Run Tests with Coverage
+      - name: Run Frontend Tests with Coverage
         if: matrix.app == 'frontend'
-        run: npm test -- --coverage
+        run: npm run test:frontend
+        working-directory: .
 
-      - name: Build App
+      # Build
+      - name: Build Frontend App
+        if: matrix.app == 'frontend'
         run: npm run build
+        working-directory: .
 
+      # Upload coverage
       - name: Upload coverage
         uses: actions/upload-artifact@v4
         with:
