@@ -41,8 +41,15 @@ jobs:
 
       - name: Run ESLint
         run: npm run lint
+        working-directory: .
+
+      - name: Run Backend Tests
+        if: matrix.app == 'backend'
+        run: npm run test:backend
+        working-directory: .
 
       - name: Run Tests with Coverage
+        if: matrix.app == 'frontend'
         run: npm test -- --coverage
 
       - name: Build App
