@@ -20,8 +20,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --coverage",
     "eject": "react-scripts eject",
-    "lint:frontend": "eslint src",
-    "lint": "eslint src --fix"
+    "lint": "eslint src --config eslint.config.js",
+    "lint:fix": "eslint src --config eslint.config.js --fix"
   },
   "eslintConfig": {
     "extends": [
