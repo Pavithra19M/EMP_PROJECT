@@ -8,7 +8,7 @@
     "start": "cross-env NODE_ENV=production node backend/server.js",
     "prepare": "husky install",
     "test": "npm run test:backend",
-    "test:backend": "cross-env NODE_ENV=test jest --coverage",
+    "test:backend": "cross-env NODE_ENV=test jest backend/ --coverage",
     "lint": "eslint frontend/src backend/ --ext .js,.jsx",
     "format": "prettier --write frontend/src"
   },
