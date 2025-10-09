@@ -33,9 +33,17 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-      - name: Install dependencies
+      # Install root dependencie for backend
+      - name: Install root dependencies
+        if: matrix.app == 'backend'
         run: npm ci
         working-directory: .
+
+      # Install root dependencie for frontend
+      - name: Install frontend dependencies
+        if: matrix.app == 'frontend'
+        run: npm ci
+        working-directory: frontend
 
       # Linting
       - name: Run Frontend Lint
