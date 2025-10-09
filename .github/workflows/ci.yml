@@ -45,12 +45,13 @@ jobs:
         run: npm ci
         working-directory: frontend
 
-      # Linting
+      # frontend Linting
       - name: Run Frontend Lint
         if: matrix.app == 'frontend'
         run: npm run lint:frontend
-        working-directory: .
+        working-directory: frontend
 
+       # backend Linting
       - name: Run Backend Lint
         if: matrix.app == 'backend'
         run: npm run lint:backend
