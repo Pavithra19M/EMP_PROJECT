@@ -22,7 +22,7 @@
     "eject": "react-scripts eject",
     "lint": "eslint src --config eslint.config.js",
     "lint:fix": "eslint src --config eslint.config.js --fix",
-    "lint:frontend": "npm run lint"
+    "lint:frontend": "eslint src --config eslint.config.js"
   },
   "eslintConfig": {
     "extends": [
