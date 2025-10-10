@@ -10,8 +10,8 @@
     "test": "npm run test:backend && npm run test:frontend",
     "test:backend": "cross-env NODE_ENV=test jest backend/ --coverage",
     "test:frontend": "cross-env NODE_ENV=test jest frontend/ --coverage",
-    "lint:frontend": "eslint frontend/src --config frontend/eslint.config.js",
-    "lint:backend": "eslint backend/ --config backend/eslint.config.js",
+    "lint:frontend": "eslint frontend/src --config eslint.config.js",
+    "lint:backend": "eslint backend/ --config eslint.config.js",
     "lint": "npm run lint:backend && npm run lint:frontend",
     "format": "prettier --write frontend/src",
     "build": "echo 'No build step needed for backend'"

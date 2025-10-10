@@ -3,8 +3,8 @@ import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import prettier from 'eslint-plugin-prettier';
 
-export const baseConfig = [
- 
+export default  [
+  
   // Base JS rules
   js.configs.recommended,
 
