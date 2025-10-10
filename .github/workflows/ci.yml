@@ -120,9 +120,7 @@ jobs:
               -Dsonar.javascript.lcov.reportPaths=frontend/coverage/lcov.info
               -Dsonar.exclusions=**/node_modules/**,**/*.test.js,**/setupTests.js,**/reportWebVitals.js,**/config/**,**/index.js
               -Dsonar.coverage.exclusions=**/App.js,**/reportWebVitals.js
-              -Dsonar.pullrequest.branch=${{ github.head_ref }}
-              -Dsonar.pullrequest.key=${{ github.event.pull_request.number }}
-              -Dsonar.pullrequest.base=main
+              ${{ github.event_name == 'pull_request' && format('-Dsonar.pullrequest.branch={0} -Dsonar.pullrequest.key={1} -Dsonar.pullrequest.base={2}', github.head_ref, github.event.pull_request.number, github.base_ref) || '' }}
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
@@ -135,8 +133,6 @@ jobs:
               -Dsonar.projectName=Pavithra_Employee_Dashboard_Backend
               -Dsonar.sources=backend
               -Dsonar.javascript.lcov.reportPaths=backend/coverage/lcov.info
-              -Dsonar.pullrequest.branch=${{ github.head_ref }}
-              -Dsonar.pullrequest.key=${{ github.event.pull_request.number }}
-              -Dsonar.pullrequest.base=main
+              ${{ github.event_name == 'pull_request' && format('-Dsonar.pullrequest.branch={0} -Dsonar.pullrequest.key={1} -Dsonar.pullrequest.base={2}', github.head_ref, github.event.pull_request.number, github.base_ref) || '' }}
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
