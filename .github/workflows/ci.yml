@@ -116,8 +116,7 @@ jobs:
               -Dsonar.projectKey=pavithra-employee-dashboard-frontend
               -Dsonar.organization=pavithra19m-1
               -Dsonar.projectName=Pavithra_Employee_Dashboard_Frontend
-              -Dsonar.sources=src
-              -Dsonar.tests=src/__tests__
+              -Dsonar.sources=frontend/src
               -Dsonar.javascript.lcov.reportPaths=frontend/coverage/lcov.info
               -Dsonar.exclusions=**/node_modules/**,**/*.test.js,**/setupTests.js,**/reportWebVitals.js,**/config/**,**/index.js
               -Dsonar.coverage.exclusions=**/App.js,**/reportWebVitals.js
@@ -134,8 +133,7 @@ jobs:
               -Dsonar.projectKey=pavithra-employee-dashboard-backend
               -Dsonar.organization=pavithra19m-1
               -Dsonar.projectName=Pavithra_Employee_Dashboard_Backend
-              -Dsonar.sources=src
-              -Dsonar.tests=src/__tests__
+              -Dsonar.sources=backend
               -Dsonar.javascript.lcov.reportPaths=backend/coverage/lcov.info
               -Dsonar.pullrequest.branch=${{ github.head_ref }}
               -Dsonar.pullrequest.key=${{ github.event.pull_request.number }}
