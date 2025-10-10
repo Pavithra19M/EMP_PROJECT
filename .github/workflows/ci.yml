@@ -112,10 +112,10 @@ jobs:
       - name: SonarCloud Scan (Frontend)
         uses: SonarSource/sonarcloud-github-action@v2
         with:
-            projectKey: pavithra-employee-dashboard-frontend
-            organization: pavithra19m-1
-            token: ${{ secrets.SONAR_TOKEN }}
             args: >
+              -Dsonar.projectKey=pavithra-employee-dashboard-frontend
+              -Dsonar.organization=pavithra19m-1
+              -Dsonar.login=${{ secrets.SONAR_TOKEN }}
               -Dsonar.projectName=Pavithra_Employee_Dashboard_Frontend
               -Dsonar.sources=src
               -Dsonar.tests=src/__tests__
@@ -129,10 +129,10 @@ jobs:
       - name: SonarCloud Scan (Backend)
         uses: SonarSource/sonarcloud-github-action@v2
         with:
-            projectKey: pavithra-employee-dashboard-backend
-            organization: pavithra19m-1
-            token: ${{ secrets.SONAR_TOKEN }}
             args: >
+              -Dsonar.projectKey=pavithra-employee-dashboard-backend
+              -Dsonar.organization=pavithra19m-1
+              -Dsonar.login=${{ secrets.SONAR_TOKEN }}
               -Dsonar.projectName=Pavithra_Employee_Dashboard_Backend
               -Dsonar.sources=src
               -Dsonar.tests=src/__tests__
