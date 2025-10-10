@@ -109,41 +109,34 @@ jobs:
           echo "Backend coverage:"
           head -n 20 backend/coverage/lcov.info || echo "Missing backend coverage"
 
-      - name: Run SonarCloud Scan (Frontend)
-        working-directory: frontend
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: |
-          sonar-scanner
-            -Dsonar.projectKey=pavithra-employee-dashboard-frontend
-            -Dsonar.projectName=Pavithra_Employee_Dashboard_Frontend
-            -Dsonar.organization=pavithra19m-1
-            -Dsonar.sources=src
-            -Dsonar.tests=src/__tests__
-            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
-            -Dsonar.exclusions=**/node_modules/**,**/*.test.js,**/setupTests.js,**/reportWebVitals.js,**/config/**,**/index.js
-            -Dsonar.coverage.exclusions=**/App.js,**/reportWebVitals.js
-            -Dsonar.pullrequest.branch=${{ github.head_ref }}
-            -Dsonar.pullrequest.key=${{ github.event.pull_request.number }}
-            -Dsonar.pullrequest.base=main
-            -Dsonar.host.url=https://sonarcloud.io
-            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+      - name: SonarCloud Scan (Frontend)
+        uses: SonarSource/sonarcloud-github-action@v2
+        with:
+            projectKey: pavithra-employee-dashboard-frontend
+            organization: pavithra19m-1
+            token: ${{ secrets.SONAR_TOKEN }}
+            args: >
+              -Dsonar.projectName=Pavithra_Employee_Dashboard_Frontend
+              -Dsonar.sources=src
+              -Dsonar.tests=src/__tests__
+              -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+              -Dsonar.exclusions=**/node_modules/**,**/*.test.js,**/setupTests.js,**/reportWebVitals.js,**/config/**,**/index.js
+              -Dsonar.coverage.exclusions=**/App.js,**/reportWebVitals.js
+              -Dsonar.pullrequest.branch=${{ github.head_ref }}
+              -Dsonar.pullrequest.key=${{ github.event.pull_request.number }}
+              -Dsonar.pullrequest.base=main
 
-      - name: Run SonarCloud Scan (Backend)
-        working-directory: backend
-        continue-on-error: false
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: |
-          sonar-scanner
-            -Dsonar.projectKey=pavithra-employee-dashboard-backend
-            -Dsonar.projectName=Pavithra_Employee_Dashboard_Backend
-            -Dsonar.organization=pavithra19m-1
-            -Dsonar.sources=src
-            -Dsonar.tests=src/__tests__
-            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
-            -Dsonar.pullrequest.branch=${{ github.head_ref }}
-            -Dsonar.pullrequest.key=${{ github.event.pull_request.number }}
-            -Dsonar.pullrequest.base=main
-            -Dsonar.host.url=https://sonarcloud.io
-            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+      - name: SonarCloud Scan (Backend)
+        uses: SonarSource/sonarcloud-github-action@v2
+        with:
+            projectKey: pavithra-employee-dashboard-backend
+            organization: pavithra19m-1
+            token: ${{ secrets.SONAR_TOKEN }}
+            args: >
+              -Dsonar.projectName=Pavithra_Employee_Dashboard_Backend
+              -Dsonar.sources=src
+              -Dsonar.tests=src/__tests__
+              -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+              -Dsonar.pullrequest.branch=${{ github.head_ref }}
+              -Dsonar.pullrequest.key=${{ github.event.pull_request.number }}
+              -Dsonar.pullrequest.base=main
