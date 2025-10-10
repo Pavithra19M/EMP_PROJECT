@@ -126,7 +126,7 @@ jobs:
               -Dsonar.pullrequest.key=${{ github.event.pull_request.number }}
               -Dsonar.pullrequest.base=main
         env:
-          -SONAR.TOKEN=${{ secrets.SONAR_TOKEN }}
+          SONAR.TOKEN=${{ secrets.SONAR_TOKEN }}
 
       - name: SonarCloud Scan (Backend)
         uses: SonarSource/sonarcloud-github-action@v2
@@ -143,4 +143,4 @@ jobs:
               -Dsonar.pullrequest.key=${{ github.event.pull_request.number }}
               -Dsonar.pullrequest.base=main
         env:
-          -SONAR.TOKEN=${{ secrets.SONAR_TOKEN }}
+          SONAR.TOKEN=${{ secrets.SONAR_TOKEN }}
