@@ -50,11 +50,13 @@ jobs:
         run: npm run lint:backend
         working-directory: .
 
+      # backend test
       - name: Run Backend Tests
         if: matrix.app == 'backend'
         run: npm run test:backend
         working-directory: .
 
+      # frontend test
       - name: Run Frontend Tests with Coverage
         if: matrix.app == 'frontend'
         run: npm run test:frontend

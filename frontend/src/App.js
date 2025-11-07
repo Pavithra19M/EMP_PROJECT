@@ -1,10 +1,23 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import Loader from './Components/Loader';
+
+const LoginPage = lazy(() => import('./Components/LoginPage'));
 
 function App() {
   return (
     <>
-      <h1>hello</h1>
-      <h1>hiiii!!!welcome to react</h1>
+      <Suspense
+        fallback={
+          <div>
+            <Loader />
+          </div>
+        }
+      >
+        <Routes>
+          <Route path="/" element={<LoginPage />} />
+        </Routes>
+      </Suspense>
     </>
   );
 }

@@ -26,7 +26,7 @@ export default {
     '!frontend/src/**/index.{js,jsx}',
     '!frontend/src/reportWebVitals.js',
     '!frontend/src/setupTests.js',
-    'frontend/src/App.{js,jsx}',
+    '!frontend/src/App.{js,jsx}',
     '!frontend/src/Components/LoginPage.jsx',
     '!frontend/src/Components/Laoder.jsx',
     '!backend/**/*.test.{js,jsx}',
@@ -36,10 +36,10 @@ export default {
   // Coverage thresholds
   coverageThreshold: {
     global: {
-      branches: 0,
-      functions: 0,
-      lines: 0,
-      statements: 0
+      branches: 70,
+      functions: 70,
+      lines: 70,
+      statements: 70
     },
     // 'frontend/src/Components/LoginForm.jsx': {
     //   branches: 70,

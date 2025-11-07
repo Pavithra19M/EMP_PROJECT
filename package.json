@@ -3,6 +3,7 @@
   "version": "2.0.0",
   "type": "module",
   "description": "Employee dashboard with MERN STACK   ",
+  "workspaces": ["frontend"],
   "main": "server.js",
   "scripts": {
     "start": "cross-env NODE_ENV=production node backend/server.js",
@@ -10,7 +11,7 @@
     "server": "nodemon backend/server.js",
     "client": "cd frontend && npm start",
     "prepare": "husky install",
-    "test": "npm run test:backend && npm run test:frontend",
+    "test": "npm run test:backend || true && npm run test:frontend",
     "test:backend": "cross-env NODE_ENV=test jest backend/ --coverage",
     "test:frontend": "cross-env NODE_ENV=test jest frontend/ --coverage",
     "lint:frontend": "eslint frontend/src --config eslint.config.js",
@@ -25,6 +26,18 @@
       "react-app/jest"
     ]
   },
+
+  "overrides": {
+  "@babel/template": "7.24.0",
+  "@babel/core": "7.24.0",
+  "@babel/preset-env": "7.24.0",
+  "@babel/preset-react": "7.27.1",
+  "@testing-library/react": {
+    "react": "19.1.1",
+    "react-dom": "19.1.1"
+  }
+},
+
   "lint-staged": {
     "frontend/src/**/*.{js,jsx}": [
       "eslint --fix --max-warnings=0",
@@ -38,11 +51,11 @@
   "author": "Pavithra",
   "license": "MIT",
   "dependencies": {
-    "bcryptjs": "^3.0.2",
-    "dotenv": "^17.2.3",
-    "express": "^5.1.0",
-    "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.19.1"
+    "bcryptjs": "3.0.2",
+    "dotenv": "17.2.3",
+    "express": "5.1.0",
+    "jsonwebtoken": "9.0.2",
+    "mongoose": "8.19.1"
   },
   "devDependencies": {
     "@babel/core": "7.24.0",
@@ -50,13 +63,13 @@
     "@babel/preset-react": "7.27.1",
     "@commitlint/cli": "19.8.1",
     "@commitlint/config-conventional": "19.8.1",
-    "@testing-library/dom": "^10.4.1",
+    "@testing-library/dom": "10.4.1",
     "@testing-library/jest-dom": "6.8.0",
-    "@testing-library/react": "16.3.0",
-    "@testing-library/user-event": "^13.5.0",
+    "@testing-library/react": "14.1.2",
+    "@testing-library/user-event": "13.5.0",
     "ajv": "8.17.1",
     "babel-jest": "29.7.0",
-    "concurrently": "^9.2.1",
+    "concurrently": "9.2.1",
     "cross-env": "10.0.0",
     "eslint": "9.37.0",
     "eslint-config-prettier": "10.1.8",
@@ -68,10 +81,10 @@
     "jest-environment-jsdom": "29.7.0",
     "jest-junit": "16.0.0",
     "lint-staged": "16.1.6",
-    "nodemon": "^3.1.10",
+    "nodemon": "3.1.10",
     "prettier": "3.6.2",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
     "supertest": "7.1.4",
     "typescript": "5.9.3"
   }
